@@ -126,8 +126,9 @@ final class SystemModule: ViperModule {
         }
     }
     
-    // MARK: perform install steps
+    // MARK: - perform install steps
     
+    /// @TODO: we should add a steppable hook system for adding custom install steps...
     func systemInstallStep(req: Request) -> EventLoopFuture<View> {
         /// if the system path equals install, we render the start install screen
         guard req.url.path == "/system/install/" else {
@@ -138,6 +139,7 @@ final class SystemModule: ViperModule {
         let assetsPath = Application.Paths.assets
 
         do {
+            /// @TODO: this should be done by FeatherCore...
             try FileManager.default.createDirectory(atPath: Application.Paths.assets,
                                                     withIntermediateDirectories: true,
                                                     attributes: [.posixPermissions: 0o744])
@@ -152,7 +154,7 @@ final class SystemModule: ViperModule {
             guard let moduleBundle = module.bundleUrl else {
                 continue
             }
-
+            /// @TODO: we should use the file storage and upload these files to the appropreate storage
             let sourcePath = moduleBundle.appendingPathComponent("Install").path
             let destinationPath = assetsPath + name + "/"
 
@@ -173,6 +175,7 @@ final class SystemModule: ViperModule {
             .flatMap { SystemVariableModel.setInstalled(db: req.db) }
             .flatMap { req.leaf.render("System/Install/Finish") }
             .flatMapError { err in
+                /// @TODO: we should present a proper failure page...
                 print(err.localizedDescription)
                 return req.eventLoop.future(error: err)
             }
