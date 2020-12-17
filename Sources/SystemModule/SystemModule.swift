@@ -48,6 +48,10 @@ final class SystemModule: ViperModule {
         
         /// cache
         app.hooks.register("prepare-request-cache", use: prepareRequestCacheHook)
+        
+        /// variables
+        app.hooks.register("variable-get", use: variableGetHook)
+        app.hooks.register("variable-set", use: variableSetHook)
 
         /// frontend
         app.hooks.register("frontend-page", use: frontendPageHook)
@@ -92,6 +96,22 @@ final class SystemModule: ViperModule {
         .map { items in
              ["system.variables": items as Any?]
         }
+    }
+
+    func variableGetHook(args: HookArguments) -> EventLoopFuture<String?> {
+        let req = args["req"] as! Request
+        let key = args["key"] as! String
+        return SystemVariableModel.find(key: key, db: req.db).map { $0?.value }
+    }
+
+    func variableSetHook(args: HookArguments) -> EventLoopFuture<Void> {
+        let req = args["req"] as! Request
+        let key = args["key"] as! String
+        let value = args["value"] as? String
+        return SystemVariableModel.query(on: req.db)
+            .filter(\.$key == key)
+            .set(\.$value, to: value?.emptyToNil)
+            .update()
     }
 
     func frontendPageHook(args: HookArguments) -> EventLoopFuture<Response?> {
