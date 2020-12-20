@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "admin-module",
-        "repositoryURL": "https://github.com/feather-modules/admin",
+        "repositoryURL": "https://github.com/FeatherCMS/admin-module",
         "state": {
           "branch": null,
           "revision": "11ab6c20e87cabc57a42cfd3300a1a360354e343",
@@ -12,7 +12,7 @@
       },
       {
         "package": "api-module",
-        "repositoryURL": "https://github.com/feather-modules/api",
+        "repositoryURL": "https://github.com/FeatherCMS/api-module",
         "state": {
           "branch": null,
           "revision": "da124c5dc5661ccdada986736d22c753b6e507d3",
@@ -57,7 +57,7 @@
       },
       {
         "package": "feather-core",
-        "repositoryURL": "https://github.com/binarybirds/feather-core",
+        "repositoryURL": "https://github.com/FeatherCMS/feather-core",
         "state": {
           "branch": null,
           "revision": "d9bea823f3270ea4ce380c77e3357d03207a7029",
@@ -93,7 +93,7 @@
       },
       {
         "package": "frontend-module",
-        "repositoryURL": "https://github.com/feather-modules/frontend",
+        "repositoryURL": "https://github.com/FeatherCMS/frontend-module",
         "state": {
           "branch": null,
           "revision": "6c1f74319cea345e369c44028f234458877087b8",
@@ -291,7 +291,7 @@
       },
       {
         "package": "user-module",
-        "repositoryURL": "https://github.com/feather-modules/user",
+        "repositoryURL": "https://github.com/FeatherCMS/user-module",
         "state": {
           "branch": null,
           "revision": "8141842d74c6915f02b66128f5cc024ade9c779b",
