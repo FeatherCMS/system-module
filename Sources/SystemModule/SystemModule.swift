@@ -45,6 +45,10 @@ final class SystemModule: ViperModule {
         /// admin
         app.hooks.register("admin", use: (router as! SystemRouter).adminRoutesHook)
         app.hooks.register("leaf-admin-menu", use: leafAdminMenuHook)
+
+        /// api
+        app.hooks.register("public-api", use: (router as! SystemRouter).publicApiRoutesHook)
+        app.hooks.register("api", use: (router as! SystemRouter).apiRoutesHook)
         
         /// cache
         app.hooks.register("prepare-request-cache", use: prepareRequestCacheHook)
