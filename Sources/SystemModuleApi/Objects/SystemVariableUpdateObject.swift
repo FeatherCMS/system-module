@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  SystemVariableUpdateObject.swift
+//  SystemModuleApi
 //
 //  Created by Tibor Bodecs on 2020. 12. 20..
 //
