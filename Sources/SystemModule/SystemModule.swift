@@ -64,27 +64,17 @@ final class SystemModule: ViperModule {
     // MARK: - hooks
 
     func leafAdminMenuHook(args: HookArguments) -> LeafDataRepresentable {
-        let app = args["app"] as! Application
-        var items = [
-            [
-                "url": "/admin/system/variables/",
-                "label": "Variables",
-                "permission": "system.variables.list",
-            ],
-        ]
-        /// if the frontend module is enabled (hacky, but it's fine.)
-        if app.viper.modules.first(where: { $0.name == "frontend" }) != nil {
-            items.append([
-                "url": "/admin/frontend/metadatas/",
-                "label": "Metadatas",
-                "permission": "frontend.metadatas.list",
-            ])
-        }
-        return [
+        [
             "name": "System",
             "icon": "settings",
             "permission": "system.module.access",
-            "items": LeafData.array(items)
+            "items": LeafData.array([
+                [
+                    "url": "/admin/system/variables/",
+                    "label": "Variables",
+                    "permission": "system.variables.list",
+                ],
+            ])
         ]
     }
 
