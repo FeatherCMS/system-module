@@ -13,6 +13,7 @@ import UserModule
 import ApiModule
 import AdminModule
 import FrontendModule
+import BlogModule
 
 import SystemModule
 
@@ -33,8 +34,9 @@ try feather.configure(database: .sqlite(.file("db.sqlite")),
                         ApiBuilder(),
                         AdminBuilder(),
                         FrontendBuilder(),
+                        BlogBuilder(),
                         
-                        SystemBuilder()
+                        SystemBuilder(),
                       ])
 if feather.app.isDebug {
     try feather.reset(resourcesOnly: true)

@@ -129,49 +129,42 @@ final class SystemModule: ViperModule {
             return req.leaf.render("System/Install/Start")
         }
     
-        /// create assets path under the public directory
-        let assetsPath = Application.Paths.assets
-
-        do {
-            /// @TODO: this should be done by FeatherCore...
-            try FileManager.default.createDirectory(atPath: Application.Paths.assets,
-                                                    withIntermediateDirectories: true,
-                                                    attributes: [.posixPermissions: 0o744])
-        }
-        catch {
-            fatalError(error.localizedDescription)
-        }
-
-        /// copy module assets if necessary
+        /// upload bundled images using the file storage if there are some files under the Install folder inside the module bundle
+        var fileUploadFutures: [EventLoopFuture<Void>] = []
         for module in req.application.viper.modules {
-            let name = module.name.lowercased()
             guard let moduleBundle = module.bundleUrl else {
                 continue
             }
-            /// @TODO: we should use the file storage and upload these files to the appropreate storage
             let sourcePath = moduleBundle.appendingPathComponent("Install").path
-            let destinationPath = assetsPath + name + "/"
-
-            do {
-                var isDir : ObjCBool = false
-                if FileManager.default.fileExists(atPath: sourcePath, isDirectory: &isDir), isDir.boolValue {
-                    try FileManager.default.copyItem(atPath: sourcePath, toPath: destinationPath)
+            let sourceUrl = URL(fileURLWithPath: sourcePath)
+            let keys: [URLResourceKey] = [.isDirectoryKey]
+            let options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .producesRelativePathURLs]
+ 
+            let urls = FileManager.default.enumerator(at: sourceUrl, includingPropertiesForKeys: keys, options: options)!
+            for case let fileUrl as URL in urls {
+                let resourceValues = try? fileUrl.resourceValues(forKeys: Set(keys))
+                if resourceValues?.isDirectory ?? true {
+                    continue
                 }
-            }
-            catch {
-                fatalError(error.localizedDescription)
+                let future = req.fileio.collectFile(at: fileUrl.path).flatMap { byteBuffer -> EventLoopFuture<Void> in
+                    guard let data = byteBuffer.getData(at: 0, length: byteBuffer.readableBytes) else {
+                        return req.eventLoop.future()
+                    }
+                    return req.fs.upload(key: fileUrl.relativePath, data: data).map { _ in }
+                }
+                fileUploadFutures.append(future)
             }
         }
 
-        /// we request the install futures for the database model creation
+        /// we request the install futures for the database models & execute them together with the file upload futures in parallel
         let modelInstallFutures: [EventLoopFuture<Void>] = req.invokeAll("model-install")
-        return req.eventLoop.flatten(modelInstallFutures)
+        return req.eventLoop.flatten(modelInstallFutures + fileUploadFutures)
             .flatMap { SystemVariableModel.setInstalled(db: req.db) }
-            .flatMap { req.leaf.render("System/Install/Finish") }
+            .flatMap { req.leaf.render(template: "System/Install/Finish") }
             .flatMapError { err in
-                /// @TODO: we should present a proper failure page...
-                print(err.localizedDescription)
-                return req.eventLoop.future(error: err)
+                req.leaf.render(template: "System/Install/Error", context: [
+                    "error": .string(err.localizedDescription),
+                ])
             }
             
     }
