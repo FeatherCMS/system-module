@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  SystemVariableModel+Api.swift
+//  SystemModule
 //
 //  Created by Tibor Bodecs on 2020. 12. 20..
 //

@@ -37,7 +37,7 @@ func modelInstallHook(args: HookArguments) -> EventLoopFuture<Void> {
 You can add your own system variables by implementing this hook. 
 
 ```swift
-app.hooks.register("model-install", use: modelInstallHook)
+app.hooks.register("system-variables-install", use: systemVariablesInstallHook)
 
 func systemVariablesInstallHook(args: HookArguments) -> [[String: Any]] {
     [
