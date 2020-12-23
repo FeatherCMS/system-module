@@ -135,6 +135,7 @@ final class SystemModule: ViperModule {
             guard let moduleBundle = module.bundleUrl else {
                 continue
             }
+            let name = module.name.lowercased()
             let sourcePath = moduleBundle.appendingPathComponent("Install").path
             let sourceUrl = URL(fileURLWithPath: sourcePath)
             let keys: [URLResourceKey] = [.isDirectoryKey]
@@ -150,7 +151,7 @@ final class SystemModule: ViperModule {
                     guard let data = byteBuffer.getData(at: 0, length: byteBuffer.readableBytes) else {
                         return req.eventLoop.future()
                     }
-                    return req.fs.upload(key: fileUrl.relativePath, data: data).map { _ in }
+                    return req.fs.upload(key: name + "/" + fileUrl.relativePath, data: data).map { _ in }
                 }
                 fileUploadFutures.append(future)
             }
