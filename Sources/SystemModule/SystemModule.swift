@@ -139,7 +139,8 @@ final class SystemModule: ViperModule {
             let sourcePath = moduleBundle.appendingPathComponent("Install").path
             let sourceUrl = URL(fileURLWithPath: sourcePath)
             let keys: [URLResourceKey] = [.isDirectoryKey]
-            let options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles, .producesRelativePathURLs]
+            
+            let options: FileManager.DirectoryEnumerationOptions = [.skipsHiddenFiles]
  
             let urls = FileManager.default.enumerator(at: sourceUrl, includingPropertiesForKeys: keys, options: options)!
             for case let fileUrl as URL in urls {
@@ -147,11 +148,13 @@ final class SystemModule: ViperModule {
                 if resourceValues?.isDirectory ?? true {
                     continue
                 }
-                let future = req.fileio.collectFile(at: fileUrl.path).flatMap { byteBuffer -> EventLoopFuture<Void> in
+                let relativePath = String(fileUrl.path.dropFirst(sourceUrl.path.count + 1))
+                let relativeUrl = URL(fileURLWithPath: relativePath, relativeTo: sourceUrl)
+                let future = req.fileio.collectFile(at: relativeUrl.path).flatMap { byteBuffer -> EventLoopFuture<Void> in
                     guard let data = byteBuffer.getData(at: 0, length: byteBuffer.readableBytes) else {
                         return req.eventLoop.future()
                     }
-                    return req.fs.upload(key: name + "/" + fileUrl.relativePath, data: data).map { _ in }
+                    return req.fs.upload(key: name + "/" + relativeUrl.relativePath, data: data).map { _ in }
                 }
                 fileUploadFutures.append(future)
             }
