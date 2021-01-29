@@ -6,15 +6,12 @@
 //
 
 import FeatherCore
-import FluentSQLiteDriver
-import LiquidLocalDriver
 
 import UserModule
 import ApiModule
 import AdminModule
 import FrontendModule
 import BlogModule
-
 import SystemModule
 
 /// setup metadata delegate object
@@ -25,20 +22,25 @@ try LoggingSystem.bootstrap(from: &env)
 let feather = try Feather(env: env)
 defer { feather.stop() }
 
-try feather.configure(database: .sqlite(.file("db.sqlite")),
-                      databaseId: .sqlite,
-                      fileStorage: .local(publicUrl: Application.baseUrl, publicPath: Application.Paths.public, workDirectory: "assets"),
-                      fileStorageId: .local,
-                      modules: [
-                        UserBuilder(),
-                        ApiBuilder(),
-                        AdminBuilder(),
-                        FrontendBuilder(),
-                        BlogBuilder(),
-                        
-                        SystemBuilder(),
-                      ])
+feather.useSQLiteDatabase()
+feather.useLocalFileStorage()
+feather.usePublicFileMiddleware()
+
+try feather.configure([
+    /// core
+    SystemBuilder(),
+    UserBuilder(),
+    ApiBuilder(),
+    AdminBuilder(),
+    FrontendBuilder(),
+    /// other
+    BlogBuilder(),
+])
+
+
+/// reset resources folder if we're in debug mode
 if feather.app.isDebug {
-    try feather.reset(resourcesOnly: true)
+    try feather.reset(resourcesOnly: false)
 }
+
 try feather.start()
