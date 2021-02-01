@@ -4,26 +4,14 @@
     "list": [
         "title": "Variables",
         "url": "/admin/system/variables/"
+    ],
+    "fields": [
+        ["label": "Id", "value": model.id],
+        ["label": "Key", "value": model.key],
+        ["label": "Name", "value": model.name],
+        ["label": "Value", "value": model.value],
+        ["label": "Notes", "value": model.notes],
     ]
 ])
-
-#define(details):
-    <dl>
-        <dt>Id</dt>
-        <dd>#(model.id)</dd>
-
-        <dt>Key</dt>
-        <dd>#(model.key)</dd>
-        
-        <dt>Name</dt>
-        <dd>#(model.name)</dd>
-
-        <dt>Value</dt>
-        <dd>#(model.value)</dd>
-        
-        <dt>Notes</dt>
-        <dd>#(model.notes)</dd>
-    </dl>
-#enddefine
 
 #inline("Admin/Detail")
