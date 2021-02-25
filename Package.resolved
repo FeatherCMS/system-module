@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "admin-module",
-        "repositoryURL": "https://github.com/FeatherCMS/admin-module",
-        "state": {
-          "branch": null,
-          "revision": "6e0be776d632170f9436b28d4ed57551867bf7de",
-          "version": "1.0.0-beta.11"
-        }
-      },
-      {
-        "package": "api-module",
-        "repositoryURL": "https://github.com/FeatherCMS/api-module",
-        "state": {
-          "branch": null,
-          "revision": "11805a20be1ee8776c6aead8fc8349fae7d5c85e",
-          "version": "1.0.0-beta.3"
-        }
-      },
-      {
         "package": "async-http-client",
         "repositoryURL": "https://github.com/swift-server/async-http-client.git",
         "state": {
@@ -35,15 +17,6 @@
           "branch": null,
           "revision": "5760c79afb8ebc24fd3251fdd9724af225fdf1f9",
           "version": "1.3.0"
-        }
-      },
-      {
-        "package": "common-module",
-        "repositoryURL": "https://github.com/FeatherCMS/common-module",
-        "state": {
-          "branch": null,
-          "revision": "ccb13bb2db6856150c2c198de795f1a405392f0e",
-          "version": "1.0.0-beta.1"
         }
       },
       {
@@ -92,24 +65,6 @@
         }
       },
       {
-        "package": "fluent-sqlite-driver",
-        "repositoryURL": "https://github.com/vapor/fluent-sqlite-driver",
-        "state": {
-          "branch": null,
-          "revision": "6f29f6f182c812075f09c7575c18ac5535c26824",
-          "version": "4.0.1"
-        }
-      },
-      {
-        "package": "frontend-module",
-        "repositoryURL": "https://github.com/FeatherCMS/frontend-module",
-        "state": {
-          "branch": null,
-          "revision": "10bee56bd9696255e8a24c083556ea58458a4430",
-          "version": "1.0.0-beta.16"
-        }
-      },
-      {
         "package": "leaf",
         "repositoryURL": "https://github.com/vapor/leaf",
         "state": {
@@ -155,15 +110,6 @@
         }
       },
       {
-        "package": "liquid-local-driver",
-        "repositoryURL": "https://github.com/binarybirds/liquid-local-driver",
-        "state": {
-          "branch": null,
-          "revision": "83b74c43f6445e7feed666139ada23b28719b920",
-          "version": "1.2.0-beta.8"
-        }
-      },
-      {
         "package": "multipart-kit",
         "repositoryURL": "https://github.com/vapor/multipart-kit.git",
         "state": {
@@ -188,24 +134,6 @@
           "branch": null,
           "revision": "6401540d12f5637b5b59707cf86f72504c34010f",
           "version": "3.8.0"
-        }
-      },
-      {
-        "package": "sqlite-kit",
-        "repositoryURL": "https://github.com/vapor/sqlite-kit.git",
-        "state": {
-          "branch": null,
-          "revision": "2ec279b9c845cec254646834b66338551a024561",
-          "version": "4.0.2"
-        }
-      },
-      {
-        "package": "sqlite-nio",
-        "repositoryURL": "https://github.com/vapor/sqlite-nio.git",
-        "state": {
-          "branch": null,
-          "revision": "6481dd0b01112d082dd7eb362782126e81964138",
-          "version": "1.1.0"
         }
       },
       {
@@ -287,15 +215,6 @@
           "branch": null,
           "revision": "1d28d48e071727f4558a8a4bb1894472abc47a58",
           "version": "1.9.2"
-        }
-      },
-      {
-        "package": "user-module",
-        "repositoryURL": "https://github.com/FeatherCMS/user-module",
-        "state": {
-          "branch": null,
-          "revision": "fea3ea4276d7c94a2a4465d211a9475747d32a28",
-          "version": "1.0.0-beta.7"
         }
       },
       {

@@ -53,7 +53,6 @@ final class SystemModule: ViperModule {
         /// variables
         app.hooks.register("variable-get", use: variableGetHook)
         app.hooks.register("variable-set", use: variableSetHook)
-        
     }
     
     // MARK: - hooks
