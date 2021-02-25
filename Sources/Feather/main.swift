@@ -7,11 +7,12 @@
 
 import FeatherCore
 
+import CommonModule
 import UserModule
 import ApiModule
 import AdminModule
 import FrontendModule
-import BlogModule
+
 import SystemModule
 
 /// setup metadata delegate object
@@ -28,19 +29,18 @@ feather.usePublicFileMiddleware()
 
 try feather.configure([
     /// core
-    SystemBuilder(),
+    CommonBuilder(),
     UserBuilder(),
     ApiBuilder(),
     AdminBuilder(),
     FrontendBuilder(),
-    /// other
-    BlogBuilder(),
+
+    SystemBuilder(),
 ])
 
-
-/// reset resources folder if we're in debug mode
 if feather.app.isDebug {
-    try feather.reset(resourcesOnly: false)
+    try feather.resetPublicFiles()
+    try feather.copyTemplatesIfNeeded()
 }
 
 try feather.start()

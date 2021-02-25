@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 import PackageDescription
 
-let isLocalTestMode = false
+let isLocalTestMode = true
 
 
 var deps: [Package.Dependency] = [
@@ -27,24 +27,23 @@ if isLocalTestMode {
         .package(url: "https://github.com/binarybirds/liquid-local-driver", from: "1.2.0-beta"),
         /// core modules
         .package(url: "https://github.com/FeatherCMS/user-module", from: "1.0.0-beta"),
+        .package(url: "https://github.com/FeatherCMS/common-module", from: "1.0.0-beta"),
         .package(url: "https://github.com/FeatherCMS/api-module", from: "1.0.0-beta"),
         .package(url: "https://github.com/FeatherCMS/admin-module", from: "1.0.0-beta"),
         .package(url: "https://github.com/FeatherCMS/frontend-module", from: "1.0.0-beta"),
-        .package(url: "https://github.com/FeatherCMS/blog-module", from: "1.0.0-beta"),
     ])
     targets.append(contentsOf: [
         .target(name: "Feather", dependencies: [
             .product(name: "FeatherCore", package: "feather-core"),
-
+            ///drivers
             .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
             .product(name: "LiquidLocalDriver", package: "liquid-local-driver"),
-
             /// core modules
+            .product(name: "CommonModule", package: "common-module"),
             .product(name: "UserModule", package: "user-module"),
             .product(name: "ApiModule", package: "api-module"),
             .product(name: "AdminModule", package: "admin-module"),
             .product(name: "FrontendModule", package: "frontend-module"),
-            .product(name: "BlogModule", package: "blog-module"),
 
             .target(name: "SystemModule"),
         ]),

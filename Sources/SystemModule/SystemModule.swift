@@ -25,7 +25,7 @@ final class SystemModule: ViperModule {
             SystemInstallGuardMiddleware(),
         ]
     }
-    
+
     static var bundleUrl: URL? {
         Bundle.module.resourceURL?.appendingPathComponent("Bundle")
     }
@@ -41,24 +41,19 @@ final class SystemModule: ViperModule {
         /// install
         app.hooks.register("model-install", use: modelInstallHook)
         app.hooks.register("user-permission-install", use: userPermissionInstallHook)
-
         /// admin
-        app.hooks.register("admin", use: (router as! SystemRouter).adminRoutesHook)
         app.hooks.register("leaf-admin-menu", use: leafAdminMenuHook)
-
-        /// api
-        app.hooks.register("public-api", use: (router as! SystemRouter).publicApiRoutesHook)
-        app.hooks.register("api", use: (router as! SystemRouter).apiRoutesHook)
-        
+        /// routes
+        app.hooks.register("frontend-route", use: frontendRouteHook)
+        app.hooks.register("admin-routes", use: (router as! SystemRouter).adminRoutesHook)
+        app.hooks.register("public-api-routes", use: (router as! SystemRouter).publicApiRoutesHook)
+        app.hooks.register("api-routes", use: (router as! SystemRouter).apiRoutesHook)
         /// cache
         app.hooks.register("prepare-request-cache", use: prepareRequestCacheHook)
-        
         /// variables
         app.hooks.register("variable-get", use: variableGetHook)
         app.hooks.register("variable-set", use: variableSetHook)
-
-        /// frontend
-        app.hooks.register("frontend-page", use: frontendPageHook)
+        
     }
     
     // MARK: - hooks
@@ -108,7 +103,7 @@ final class SystemModule: ViperModule {
             .update()
     }
 
-    func frontendPageHook(args: HookArguments) -> EventLoopFuture<Response?> {
+    func frontendRouteHook(args: HookArguments) -> EventLoopFuture<Response?> {
         let req = args["req"] as! Request
 
         /// check if system is already installed, if yes we don't do anything
