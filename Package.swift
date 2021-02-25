@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 import PackageDescription
 
-let isLocalTestMode = true
+let isLocalTestMode = false
 
 
 var deps: [Package.Dependency] = [
