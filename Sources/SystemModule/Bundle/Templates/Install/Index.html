@@ -10,26 +10,45 @@
     
     <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/binarybirds/peacock-css@1.0.0-beta.4/peacock.min.css">
+    #if($app.isDebug ?? false):
+        #for(file in $app.css ?? []):
+            <link rel="stylesheet" href="/css/#(file).css">
+        #endfor
+    #else:
+        <link rel="stylesheet" href="/css/style.min.css">
+    #endif
 
-    #for(file in InvokeAllHooks("frontend-css")):
-        #if($app.isDebug ?? false):
-        <link rel="stylesheet" href="/css/#(file.name).css">
-        #else:
-        <link rel="stylesheet" href="/css/#(file.name).min.css">
-        #endif
-    #endfor
+    <style>
+        body {
+            text-align: center;
+        }
+        main {
+            flex: 1;
+            overflow: auto;
+        }
+        #menu-logo {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+   </style>
+
 </head>
 
 <body>
-    <header id="header" class="container padding-s text-align-center">
-        <a id="logo" href="/" style="float: none;">
-            <img src="/images/logo-text.png" alt="Logo of #($system.variables["frontend.site.title"])" title="#($system.variables["frontend.site.title"])">
-        </a>
-    </header>
 
-    <main class="container text-align-center">
-        #body()
-    </main>
+    <a href="/" id="menu-logo">
+        <img src="/images/logo-text.png" alt="Logo of Feather CMS" title="Feather CMS">
+    </a>
+
+    <div class="full-height">
+        <main class="bg-1">
+            <div class="wrapper">
+                #body()
+            </div>
+        </main>
+    </div>
+    
 </body>
 </html>
