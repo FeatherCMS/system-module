@@ -30,10 +30,10 @@ final class SystemModule: ViperModule {
         Bundle.module.resourceURL?.appendingPathComponent("Bundle")
     }
     
-    func leafDataGenerator(for req: Request) -> [String: LeafDataGenerator]? {
+    func templateDataGenerator(for req: Request) -> [String: TemplateDataGenerator]? {
         let variables = req.cache["system.variables"] as? [String: String?] ?? [:]
         return [
-            "variables": .lazy(LeafData.dictionary(variables))
+            "variables": .lazy(TemplateData.dictionary(variables))
         ]
     }
 
@@ -57,12 +57,12 @@ final class SystemModule: ViperModule {
     
     // MARK: - hooks
 
-    func leafAdminMenuHook(args: HookArguments) -> LeafDataRepresentable {
+    func leafAdminMenuHook(args: HookArguments) -> TemplateDataRepresentable {
         [
             "name": "System",
             "icon": "settings",
             "permission": "system.module.access",
-            "items": LeafData.array([
+            "items": TemplateData.array([
                 [
                     "url": "/admin/system/variables/",
                     "label": "Variables",
@@ -120,7 +120,7 @@ final class SystemModule: ViperModule {
     func systemInstallStep(req: Request) -> EventLoopFuture<View> {
         /// if the system path equals install, we render the start install screen
         guard req.url.path == "/system/install/" else {
-            return req.leaf.render("System/Install/Start")
+            return req.tau.render("System/Install/Start")
         }
     
         /// upload bundled images using the file storage if there are some files under the Install folder inside the module bundle
@@ -158,9 +158,9 @@ final class SystemModule: ViperModule {
         let modelInstallFutures: [EventLoopFuture<Void>] = req.invokeAll("model-install")
         return req.eventLoop.flatten(modelInstallFutures + fileUploadFutures)
             .flatMap { SystemVariableModel.setInstalled(db: req.db) }
-            .flatMap { req.leaf.render(template: "System/Install/Finish") }
+            .flatMap { req.tau.render(template: "System/Install/Finish") }
             .flatMapError { err in
-                req.leaf.render(template: "System/Install/Error", context: [
+                req.tau.render(template: "System/Install/Error", context: [
                     "error": .string(err.localizedDescription),
                 ])
             }

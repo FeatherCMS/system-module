@@ -7,9 +7,9 @@
 
 import FeatherCore
 
-extension SystemVariableModel: LeafDataRepresentable {
+extension SystemVariableModel: TemplateDataRepresentable {
 
-    var leafData: LeafData {
+    var templateData: TemplateData {
         .dictionary([
             "id": id,
             "key": key,
