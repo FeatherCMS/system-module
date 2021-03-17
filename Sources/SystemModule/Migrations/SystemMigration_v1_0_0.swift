@@ -14,9 +14,9 @@ struct SystemMigration_v1_0_0: Migration {
             .id()
             .field(SystemVariableModel.FieldKeys.key, .string, .required)
             .field(SystemVariableModel.FieldKeys.name, .string, .required)
-            .field(SystemVariableModel.FieldKeys.value, .data)
+            .field(SystemVariableModel.FieldKeys.value, .string)
             .field(SystemVariableModel.FieldKeys.hidden, .bool, .required)
-            .field(SystemVariableModel.FieldKeys.notes, .data)
+            .field(SystemVariableModel.FieldKeys.notes, .string)
             .unique(on: SystemVariableModel.FieldKeys.key)
             .create()
     }
