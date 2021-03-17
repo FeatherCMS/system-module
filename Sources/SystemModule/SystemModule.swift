@@ -42,7 +42,7 @@ final class SystemModule: ViperModule {
         app.hooks.register("model-install", use: modelInstallHook)
         app.hooks.register("user-permission-install", use: userPermissionInstallHook)
         /// admin
-        app.hooks.register("leaf-admin-menu", use: leafAdminMenuHook)
+        app.hooks.register("template-admin-menu", use: templateAdminMenuHook)
         /// routes
         app.hooks.register("frontend-route", use: frontendRouteHook)
         app.hooks.register("admin-routes", use: (router as! SystemRouter).adminRoutesHook)
@@ -57,7 +57,7 @@ final class SystemModule: ViperModule {
     
     // MARK: - hooks
 
-    func leafAdminMenuHook(args: HookArguments) -> TemplateDataRepresentable {
+    func templateAdminMenuHook(args: HookArguments) -> TemplateDataRepresentable {
         [
             "name": "System",
             "icon": "settings",

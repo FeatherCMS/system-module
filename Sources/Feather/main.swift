@@ -39,7 +39,7 @@ try feather.configure([
 ])
 
 if feather.app.isDebug {
-    try feather.resetPublicFiles()
+//    try feather.resetPublicFiles()
     try feather.copyTemplatesIfNeeded()
 }
 

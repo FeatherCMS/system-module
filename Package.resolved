@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "admin-module",
+        "repositoryURL": "https://github.com/FeatherCMS/admin-module",
+        "state": {
+          "branch": null,
+          "revision": "d876c572dc0045e22a7535528677b0926747826d",
+          "version": "1.0.0-beta.12.3"
+        }
+      },
+      {
+        "package": "api-module",
+        "repositoryURL": "https://github.com/FeatherCMS/api-module",
+        "state": {
+          "branch": null,
+          "revision": "d12686ca881f90a0d5582db33800a7799065535f",
+          "version": "1.0.0-beta.5"
+        }
+      },
+      {
         "package": "async-http-client",
         "repositoryURL": "https://github.com/swift-server/async-http-client.git",
         "state": {
@@ -17,6 +35,15 @@
           "branch": null,
           "revision": "5760c79afb8ebc24fd3251fdd9724af225fdf1f9",
           "version": "1.3.0"
+        }
+      },
+      {
+        "package": "common-module",
+        "repositoryURL": "https://github.com/FeatherCMS/common-module",
+        "state": {
+          "branch": null,
+          "revision": "97383a31f4db23507766389028c6946d11fd160b",
+          "version": "1.0.0-beta.2"
         }
       },
       {
@@ -65,6 +92,24 @@
         }
       },
       {
+        "package": "fluent-sqlite-driver",
+        "repositoryURL": "https://github.com/vapor/fluent-sqlite-driver",
+        "state": {
+          "branch": null,
+          "revision": "6f29f6f182c812075f09c7575c18ac5535c26824",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "frontend-module",
+        "repositoryURL": "https://github.com/FeatherCMS/frontend-module",
+        "state": {
+          "branch": null,
+          "revision": "e1bc88493dcb71889de9dd68a719aceb0ff4fabc",
+          "version": "1.0.0-beta.17"
+        }
+      },
+      {
         "package": "liquid",
         "repositoryURL": "https://github.com/binarybirds/liquid",
         "state": {
@@ -79,6 +124,15 @@
         "state": {
           "branch": null,
           "revision": "1a765f00acd7743878b871c9841507e85d37c567",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "liquid-local-driver",
+        "repositoryURL": "https://github.com/binarybirds/liquid-local-driver",
+        "state": {
+          "branch": null,
+          "revision": "0a496aad8f8e544e150f2df74db52cbd44f32509",
           "version": "1.2.0"
         }
       },
@@ -107,6 +161,24 @@
           "branch": null,
           "revision": "2e1ffbfa5ec6c87f6c932ecebbc11c7a5bc0115d",
           "version": "3.8.1"
+        }
+      },
+      {
+        "package": "sqlite-kit",
+        "repositoryURL": "https://github.com/vapor/sqlite-kit.git",
+        "state": {
+          "branch": null,
+          "revision": "2ec279b9c845cec254646834b66338551a024561",
+          "version": "4.0.2"
+        }
+      },
+      {
+        "package": "sqlite-nio",
+        "repositoryURL": "https://github.com/vapor/sqlite-nio.git",
+        "state": {
+          "branch": null,
+          "revision": "6481dd0b01112d082dd7eb362782126e81964138",
+          "version": "1.1.0"
         }
       },
       {
@@ -213,8 +285,17 @@
         "repositoryURL": "https://github.com/binarybirds/tau-kit",
         "state": {
           "branch": null,
-          "revision": "907a31cb6e2937db0a7aba6f5d90a634d30f26cd",
-          "version": "1.0.0"
+          "revision": "71e14868c88d16e32fc355a894398f7f877e58ee",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "user-module",
+        "repositoryURL": "https://github.com/FeatherCMS/user-module",
+        "state": {
+          "branch": null,
+          "revision": "d99c27e54c405e206782a38112bbb5e1fa5792fc",
+          "version": "1.0.0-beta.9.1"
         }
       },
       {
@@ -240,8 +321,8 @@
         "repositoryURL": "https://github.com/binarybirds/viper-kit",
         "state": {
           "branch": null,
-          "revision": "ae82618b8fc668838bcbaedba516d368e8318d06",
-          "version": "1.5.0-rc.1"
+          "revision": "bac0f07af9bc1731a24ff6da573c838ed1f47afb",
+          "version": "1.5.0-rc.1.1"
         }
       },
       {
